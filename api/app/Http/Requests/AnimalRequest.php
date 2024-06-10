@@ -16,6 +16,8 @@ class AnimalRequest extends FormRequest
             'description' => 'required|string|min:3|max:255',
             'entry_date' => 'required|date',
             'birth_date' => 'sometimes|required|date',
+            'vaccines' => 'sometimes|array',
+            'medical_informations' => 'sometimes|array',
         ];
     }
 
