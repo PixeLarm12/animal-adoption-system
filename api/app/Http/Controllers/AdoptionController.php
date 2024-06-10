@@ -2,63 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AdoptionRequest;
+use App\Models\Adoption;
+use App\Repositories\AdoptionRepository;
+use Illuminate\Http\JsonResponse;
 
 class AdoptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $adoptionRepository;
+
+    public function __construct(AdoptionRepository $adoptionRepository)
     {
-        //
+        return $this->adoptionRepository = $adoptionRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->adoptionRepository->all(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(AdoptionRequest $request): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->adoptionRepository->save($request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(AdoptionRequest $request, Adoption $adoption): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->adoptionRepository->update($adoption, $request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(Adoption $adoption): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($this->adoptionRepository->delete($adoption), 200);
     }
 }
