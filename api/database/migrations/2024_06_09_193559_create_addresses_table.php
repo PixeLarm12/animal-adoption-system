@@ -15,6 +15,9 @@ return new class extends Migration
             $table->string('zipcode');
             $table->string('neighborhood', 30);
             $table->string('complement', 80)->nullable();
+            $table->unsignedBigInteger('person_id');
+
+            $table->foreign('person_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('adoptions', function (Blueprint $table) {
             $table->id();
             $table->string('status', 20);
-            $table->date('adoption_date', 20);
+            $table->date('adoption_date');
             $table->text('observation', 255)->nullable();
             $table->unsignedBigInteger('animal_id');
             $table->unsignedBigInteger('person_id');

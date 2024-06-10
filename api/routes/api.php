@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('/users',  UserController::class)->names('users');
+Route::apiResource('/adoptions',  AdoptionController::class)->names('adoptions');
+Route::apiResource('/animals',  AnimalController::class)->names('animals');
+Route::apiResource('/catalogs',  CatalogController::class)->names('catalogs');
