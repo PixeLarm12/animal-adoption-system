@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "48f6e67b-0388-462d-8be1-9ccdec8ac49e",
+		"name": "Animal Adoption System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19752207"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/users",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Lucas Ramos Domingues\",\n    \"email\": \"lucas@gmail.com\",\n    \"password\": \"123123\",\n    \"confirm_password\": \"123123\",\n    \"cpf\": \"52722306808\",\n    \"birth_date\": \"2003-06-0\",\n    \"phones\": [\n        {\n            \"area\": \"14\",\n            \"phone\": \"997929908\"\n        },\n        {\n            \"area\": \"14\",\n            \"phone\": \"32122475\"\n        }\n    ],\n    \"addresses\": [\n        {\n            \"street\": \"Marcal de Arruda Campos\",\n            \"number\": \"795\",\n            \"zipcode\": \"17063060\",\n            \"neighborhood\": \"Jd. Petropolis\",\n            \"complement\": \"\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1, \n    \"name\": \"Admin User\",\n    \"email\": \"admin@admin.com\",\n    \"cpf\": \"52722306808\",\n    \"birth_date\": \"2003-06-0\",\n    \"phones\": [\n        {\n            \"area\": \"14\",\n            \"phone\": \"997929908\",\n            \"person_id\": 1\n        },\n        {\n            \"area\": \"14\",\n            \"phone\": \"32122475\",\n            \"person_id\": 1\n        }\n    ],\n    \"addresses\": [\n        {\n            \"street\": \"Marcal de Arruda Campos\",\n            \"number\": \"795\",\n            \"zipcode\": \"17063060\",\n            \"neighborhood\": \"Jd. Petropolis\",\n            \"complement\": \"\",\n            \"person_id\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/users/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/users/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/catalogs",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"catalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Catalogo de Cachorrinhos\", \n    \"description\": \"Um catalogo com todos os doguinhos para adocao!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/catalogs",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"catalogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Catalogo de Cachorrinhos\", \n    \"description\": \"Um catalogo com todos os doguinhos para adocao!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/catalogs/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"catalogs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/catalogs/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"catalogs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Animals",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/animals",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"adoption_status\": \"not_started\",\n    \"name\": \"Felix\",\n    \"specie\": \"cat\",\n    \"sex\": \"m\",\n    \"description\": \"Um gatinho preto e branco fofo\",\n    \"entry_date\": \"2024-06-10\",\n    \"birth_date\": \"2018-06-12\",\n    \"vaccines\": [\n        {\n            \"title\": \"Antirrabica\",\n            \"date\": \"2024-06-10\",\n            \"next\": \"\",\n            \"description\": \"Vacina anti-raiva\"\n        }\n    ],\n    \"medical_informations\": [\n        {\n            \"description\": \"Machucou a patinha esquerda\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/animals",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"adoption_status\": \"not_started\",\n    \"name\": \"Felix\",\n    \"specie\": \"cat\",\n    \"sex\": \"m\",\n    \"description\": \"Um gatinho preto e branco fofo\",\n    \"entry_date\": \"2024-06-10\",\n    \"birth_date\": \"2018-06-12\",\n    \"vaccines\": [\n        {\n            \"title\": \"Antirrabica\",\n            \"date\": \"2024-06-10\",\n            \"next\": \"\",\n            \"description\": \"Vacina anti-raiva\"\n        }\n    ],\n    \"medical_informations\": [\n        {\n            \"description\": \"Machucou a patinha esquerda\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/animals/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"animals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/animals/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"animals",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Adoption",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/adoption",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"adoption"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"animal_id\": 1,\n    \"person_id\": 1,\n    \"status\": \"processing\",\n    \"adoption_date\": \"2024-06-10\",\n    \"observation\": \"O gato esta em outra cidade\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/adoption",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"adoption"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"animal_id\": 1,\n    \"person_id\": 1,\n    \"status\": \"accepted\",\n    \"adoption_date\": \"2024-06-10\",\n    \"observation\": \"O gato foi adotados\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api}}/adoptions/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"adoptions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api}}/adoptions/1",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"adoptions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "api",
+			"value": "localhost"
+		}
+	]
+}
