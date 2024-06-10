@@ -15,6 +15,7 @@ class Address extends Model
         'zipcode',
         'neighborhood',
         'complement',
+        'person_id',
     ];
 
     public function user(): BelongsTo
