@@ -2,63 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
-        //
+        return $this->userRepository = $userRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->userRepository->all(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(UserRequest $request): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->userRepository->save($request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(UserRequest $request, User $user): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->userRepository->update($user, $request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(User $user): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($this->userRepository->delete($user), 200);
     }
 }
