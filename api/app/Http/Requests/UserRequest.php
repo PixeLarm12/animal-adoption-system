@@ -11,9 +11,11 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:60',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8|max:400',
+            'password' => 'required_if:id,null|confirmed|min:8|max:400',
             'cpf' => 'required|unique',
             'birth_date' => 'required|date',
+            'phones' => 'required|array|min:1',
+            'addresses' => 'required|array|min:1',
         ];
     }
 
@@ -32,6 +34,10 @@ class UserRequest extends FormRequest
             'cpf.required' => ':attribute is required.',
             'cpf.unique' => ':attribute must be unique.',
             'birth_date.required' => ':attribute is required.',
+            'phones.required' => ':attribute is required.',
+            'phones.min' => ':attribute must have at least 1 phone number.',
+            'addresses.required' => ':attribute is required.',
+            'addresses.min' => ':attribute must have at least 1 address.',
         ];
     }
 
@@ -43,6 +49,8 @@ class UserRequest extends FormRequest
             'password' => $this->input('password'),
             'cpf' => $this->input('cpf'),
             'birth_date' => $this->input('birth_date'),
+            'phones' => $this->input('phones'),
+            'addresses' => $this->input('addresses'),
         ];
     }
 }
