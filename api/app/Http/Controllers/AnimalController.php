@@ -2,63 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\AnimalRequest;
+use App\Models\Animal;
+use Illuminate\Http\JsonResponse;
+use App\Repositories\AnimalRepository;
 
 class AnimalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected $animalRepository;
+
+    public function __construct(AnimalRepository $animalRepository)
     {
-        //
+        return $this->animalRepository = $animalRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json($this->animalRepository->all(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(AnimalRequest $request): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->animalRepository->save($request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(AnimalRequest $request, Animal $animal): JsonResponse
     {
-        //
+        if($request->validated())
+            return response()->json($this->animalRepository->update($animal, $request->getData()), 200);
+
+        return response()->json(["message" => "Validation error!"], 403);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(Animal $animal): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json($this->animalRepository->delete($animal), 200);
     }
 }
