@@ -6,11 +6,12 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "tail-watch": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch"
+    "watch-tailwind": "npx tailwindcss -i ./src/css/input.css -o ./src/css/build.css --watch"
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.12",
