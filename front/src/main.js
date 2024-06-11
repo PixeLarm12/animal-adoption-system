@@ -4,9 +4,11 @@ import './css/output.css'
 
 import App from './App.vue'
 import Home from './pages/Home.vue'
+import Login from './pages/Login.vue'
 
 const routes = [
     { path: '/', name: "home", component: Home, meta: { title: 'Home'} },
+    { path: '/login', name: "login", component: Login, meta: { title: 'Login'} },
 ]
 
 const router = createRouter({
