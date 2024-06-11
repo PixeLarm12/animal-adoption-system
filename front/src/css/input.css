@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .default-input {
-    @apply w-full bg-gray-50 text-default-gray rounded-md h-8 pl-2 focus:bg-gray-100;
+    @apply w-full bg-gray-50 text-default-gray rounded-md h-10 pl-2 focus:bg-gray-100 border border-default-gray border-opacity-40;
 }
 
 .default-button {
