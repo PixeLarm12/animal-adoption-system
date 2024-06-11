@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="col-span-12 w-8/12 flex justify-start items-center text-left flex-wrap">
-                    <label for="title" class="text-default-gray font-bold text-lg">Description <span class="text-xl text-red-600 font-bold">*</span></label>
+                    <label for="description" class="text-default-gray font-bold text-lg">Description <span class="text-xl text-red-600 font-bold">*</span></label>
                     <textarea v-model="catalog.description" name="description" id="description" placeholder="Type catalog's description..." class="default-input-textarea" cols="30" rows="5" required></textarea>
                 </div>
 
