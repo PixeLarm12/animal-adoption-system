@@ -11,3 +11,7 @@
 .default-button {
     @apply h-10 bg-orange-500 rounded-md flex justify-center items-center text-white font-bold uppercase;
 }
+
+.bg-catalog-card {
+    @apply bg-gray-50 border border-default-gray rounded-md h-80 w-56 hover:scale-105 hover:duration-200 hover:cursor-pointer flex flex-col justify-center items-center;
+}
