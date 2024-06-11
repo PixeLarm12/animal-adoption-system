@@ -6,22 +6,24 @@
                     <router-link to="/animals/create" class="default-button">Create new Animal</router-link>
                     
                     <table-template :headers="tableHeaders">
-                        <tr v-for="animal in animals" :key="animal.id" class="text-default-gray bg-gray-100 border border-default-gray">
-                            <td class="border border-default-gray w-4/12">
+                        <tr v-for="animal in animals" :key="animal.id" class="w-full border border-black divide-x-2 divide-black">
+                            <td class="lg:pl-3 pl-1 h-10 w-4/12">
                                 {{ animal.name }}
                             </td>
-                            <td class="border border-default-gray w-2/12">
+                            <td class="lg:pl-3 pl-1 h-10 w-2/12">
                                 {{ animal.specie }}
                             </td>
-                            <td class="border border-default-gray w-1/12">
+                            <td class="lg:pl-3 pl-1 h-10 w-1/12">
                                 {{ animal.sex }}
                             </td>
-                            <td class="border border-default-gray w-3/12">
+                            <td class="lg:pl-3 pl-1 h-10 w-2/12">
                                 {{ animal.adoption_status }}
                             </td>
-                            <td class="border border-default-gray flex justify-around w-2/12">
-                                <router-link :to="'/animals/edit/' + animal.id" class="hover:underline uppercase">Edit</router-link>
-                                <span @click="remove(animal.id)" class="hover:underline uppercase">Delete</span>
+                            <td class="lg:pl-3 pl-1 h-10 w-1/12">
+                                <div class="w-full flex justify-start lg:gap-6 gap-1">
+                                    <router-link :to="'/animals/edit/' + animal.id" class="hover:underline uppercase">Edit</router-link>
+                                    <span @click="remove(animal.id)" class="hover:underline uppercase">Delete</span>
+                                </div>
                             </td>
                         </tr>  
                     </table-template>
