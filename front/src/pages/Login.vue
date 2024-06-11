@@ -4,12 +4,12 @@
             <div class="w-full h-full grid grid-cols-12 place-content-center place-items-center gap-y-10">
                 <div class="col-span-12 w-5/12 flex justify-start items-center text-left flex-wrap">
                     <label for="email" class="text-default-gray font-bold text-lg">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Type your email..." class="default-input">
+                    <input v-model="email" type="email" name="email" id="email" placeholder="Type your email..." class="default-input">
                 </div>
 
                 <div class="col-span-12 w-5/12 flex justify-start items-center text-left flex-wrap">
                     <label for="password" class="text-default-gray font-bold text-lg">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Type your password..." class="default-input">
+                    <input v-model="password" type="password" name="password" id="password" placeholder="Type your password..." class="default-input">
                 </div>
 
                 <div class="col-span-12 w-5/12 flex justify-center items-center text-left">
@@ -19,3 +19,14 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            email: '',
+            password: '',
+        }
+    },
+}
+</script>
