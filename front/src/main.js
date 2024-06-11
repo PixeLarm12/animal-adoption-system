@@ -8,7 +8,7 @@ import Login from './pages/Login.vue'
 import Catalogs from './pages/Catalogs.vue'
 import CatalogDetail from './pages/CatalogDetail.vue'
 import Animals from './pages/Animals.vue'
-import AnimalCreate from './pages/AnimalCreate.vue'
+import AnimalCreateOrEdit from './pages/AnimalCreateOrEdit.vue'
 
 const routes = [
     { path: '/', name: "home", component: Home, meta: { title: 'Home'} },
@@ -16,7 +16,8 @@ const routes = [
     { path: '/catalogs', name: "catalogs", component: Catalogs, meta: { title: 'Catalogs'} },
     { path: '/catalogs/detail/:id', name: "catalogs-detail", component: CatalogDetail, meta: { title: 'CatalogDetail'} },
     { path: '/animals', name: "animals", component: Animals, meta: { title: 'Animals'} },
-    { path: '/animals/create', name: "animals-create", component: AnimalCreate, meta: { title: 'AnimalCreate'} },
+    { path: '/animals/create', name: "animals-create", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
+    { path: '/animals/edit/:id', name: "animals-edit", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
 ]
 
 const router = createRouter({

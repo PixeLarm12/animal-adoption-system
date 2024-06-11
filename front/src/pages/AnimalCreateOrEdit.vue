@@ -1,5 +1,5 @@
 <template>
-    <page-template title="Create new Animal">
+    <page-template :title="getPageTitle">
         <div class="w-8/12 py-6 flex flex-col justify-center items-center bg-gray-100 shadow-md border border-gray-600 rounded-md">
             <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-y-10">
                 <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
@@ -53,12 +53,23 @@
 import PageTemplate from "../components/PageTemplate.vue"
 
 export default {
+    beforeMount() {
+        // if(this.$route.params.id) {
+        //     this.getAnimal();
+        // }
+    },
     components: {
         PageTemplate
+    },
+    computed: {
+        getPageTitle() {
+            return this.animal.id ? `Edit ${this.animal.name}` : 'Create Animal';
+        },
     },
     data() {
         return {
             animal: {
+                id: '',
                 adoption_status: '',
                 name: '',
                 specie: '',
@@ -108,7 +119,8 @@ export default {
                 },
             ],
         }
-    }
+    },
+    
 }
 
 </script>
