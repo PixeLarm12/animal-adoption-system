@@ -10,6 +10,8 @@ import CatalogCreateOrEdit from './pages/Catalogs/CatalogCreateOrEdit.vue'
 import CatalogDetail from './pages/Catalogs/CatalogDetail.vue'
 import Animals from './pages/Animals/Animals.vue'
 import AnimalCreateOrEdit from './pages/Animals/AnimalCreateOrEdit.vue'
+import Adoptions from './pages/Adoptions/Adoptions.vue'
+import AdoptionCreateOrEdit from './pages/Adoptions/AdoptionCreateOrEdit.vue'
 
 const routes = [
     { path: '/', name: "home", component: Home, meta: { title: 'Home'} },
@@ -21,6 +23,8 @@ const routes = [
     { path: '/animals', name: "animals", component: Animals, meta: { title: 'Animals'} },
     { path: '/animals/create', name: "animals-create", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
     { path: '/animals/edit/:id', name: "animals-edit", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
+    { path: '/adoptions', name: "adoptions", component: Adoptions, meta: { title: 'Adoptions'} },
+    { path: '/adoptions/create', name: "adoptions-create", component: AdoptionCreateOrEdit, meta: { title: 'AdoptionCreateOrEdit'} },
 ]
 
 const router = createRouter({
