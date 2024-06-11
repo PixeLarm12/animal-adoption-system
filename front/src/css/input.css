@@ -13,7 +13,7 @@
 }
 
 .default-button {
-    @apply h-10 bg-orange-500 rounded-sm flex justify-center items-center text-white font-bold uppercase px-4;
+    @apply h-10 bg-orange-500 rounded-sm flex justify-center items-center text-white font-bold uppercase px-4 hover:bg-orange-600;
 }
 
 .bg-catalog-card {
