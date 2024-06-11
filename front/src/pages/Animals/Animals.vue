@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import PageTemplate from "../components/PageTemplate.vue"
-import TableTemplate from '../components/Utils/TableTemplate.vue'
+import PageTemplate from "../../components/PageTemplate.vue"
+import TableTemplate from '../../components/Utils/TableTemplate.vue'
 
 export default {
     components: {

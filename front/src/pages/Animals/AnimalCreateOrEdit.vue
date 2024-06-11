@@ -41,6 +41,11 @@
                     <input v-model="animal.birth_date" type="date" name="birth-date" id="birth-date" class="default-input" required>
                 </div>
 
+                <div class="col-span-12 w-8/12 flex justify-start items-center text-left flex-wrap">
+                    <label for="title" class="text-default-gray font-bold text-lg">Description <span class="text-xl text-red-600 font-bold">*</span></label>
+                    <textarea v-model="animal.description" name="description" id="description" placeholder="Type animal's description..." class="default-input resize-none" required></textarea>
+                </div>
+
                 <div class="col-span-12 w-6/12 flex justify-center items-center text-left">
                     <button class="w-full default-button">Save</button>
                 </div>
@@ -50,7 +55,7 @@
 </template>
 
 <script>
-import PageTemplate from "../components/PageTemplate.vue"
+import PageTemplate from "../../components/PageTemplate.vue"
 
 export default {
     beforeMount() {

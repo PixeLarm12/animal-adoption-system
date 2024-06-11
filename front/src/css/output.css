@@ -640,8 +640,8 @@ video {
   width: 100vw;
 }
 
-.w-9\/12{
-  width: 75%;
+.resize-none{
+  resize: none;
 }
 
 .grid-cols-12{
@@ -830,6 +830,25 @@ video {
 }
 
 .default-input:focus{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.default-input-textarea{
+  width: 100%;
+  resize: none;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: rgb(99 98 98 / var(--tw-border-opacity));
+  --tw-border-opacity: 0.4;
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+  padding-left: 0.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(99 98 98 / var(--tw-text-opacity));
+}
+
+.default-input-textarea:focus{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
