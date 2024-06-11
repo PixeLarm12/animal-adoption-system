@@ -18,10 +18,10 @@
                     <td class="lg:pl-3 pl-1 h-10 w-4/12">
                         {{ catalog.title }}
                     </td>
-                    <td class="lg:pl-3 pl-1 h-10 w-2/12">
+                    <td class="lg:pl-3 pl-1 h-10 w-6/12">
                         {{ catalog.description }}
                     </td>
-                    <td class="lg:pl-3 pl-1 h-10 w-1/12">
+                    <td class="lg:pl-3 pl-1 h-10 w-2/12">
                         <div class="w-full flex justify-start lg:gap-6 gap-1">
                             <router-link :to="'/catalogs/edit/' + catalog.id" class="hover:underline uppercase">Edit</router-link>
                             <span @click="remove(catalog.id)" class="hover:underline uppercase">Delete</span>
