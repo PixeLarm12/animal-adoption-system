@@ -15,9 +15,9 @@ class AnimalRequest extends FormRequest
             'sex' => 'required|string|max:5',
             'description' => 'required|string|min:3|max:255',
             'entry_date' => 'required|date',
-            'birth_date' => 'sometimes|required|date',
-            'vaccines' => 'sometimes|array',
-            'medical_informations' => 'sometimes|array',
+            'birth_date' => 'sometimes|nullable|date',
+            'vaccines' => 'sometimes|nullable|array',
+            'medical_informations' => 'sometimes|nullable|array',
         ];
     }
 
@@ -50,6 +50,8 @@ class AnimalRequest extends FormRequest
             'description' => $this->input('description'),
             'entry_date' => $this->input('entry_date'),
             'birth_date' => $this->input('birth_date'),
+            'vaccines' => $this->input('vaccines'),
+            'medical_informations' => $this->input('medical_informations'),
         ];
     }
 }

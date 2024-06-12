@@ -32,4 +32,26 @@ class Adoption extends Model
     {
         return $this->hasOne(Animal::class);
     }
+
+    public static function getAdoptionStatus()
+    {
+        return [
+            [
+                "key" => self::ADOPTION_STATUS_NOT_STARTED,
+                "label" => "Not started",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_PROCESSING,
+                "label" => "Processing",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_ACCEPTED,
+                "label" => "Accepted",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_NOT_ACCEPTED,
+                "label" => "Not accepted",
+            ],
+        ];
+    }
 }

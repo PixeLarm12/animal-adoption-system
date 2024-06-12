@@ -21,6 +21,11 @@ class AnimalController extends Controller
         return response()->json($this->animalRepository->all(), 200);
     }
 
+    public function show($id): JsonResponse
+    {
+        return response()->json($this->animalRepository->find($id), 200);
+    }
+
     public function store(AnimalRequest $request): JsonResponse
     {
         if($request->validated())
@@ -40,5 +45,10 @@ class AnimalController extends Controller
     public function destroy(Animal $animal): JsonResponse
     {
         return response()->json($this->animalRepository->delete($animal), 200);
+    }
+
+    public function getFormSelectOptions(): JsonResponse
+    {
+        return response()->json($this->animalRepository->getFormSelectOptions(), 200);
     }
 }

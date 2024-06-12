@@ -9,4 +9,9 @@ class AdoptionRepository extends BaseRepository
     public function __construct(Adoption $model) {
         parent::__construct($model);
     }
+
+    public function getAdoptionStatus(): array
+    {
+        return Adoption::getAdoptionStatus();
+    }
 }

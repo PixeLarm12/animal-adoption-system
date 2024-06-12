@@ -49,4 +49,30 @@ class Animal extends Model
     {
         return $this->belongsToMany(Catalog::class, 'animals_catalogs', 'animal_id');
     }
+
+    public static function getSpecies()
+    {
+        return [
+            [
+                "key" => self::ANIMAL_SPECIE_DOG,
+                "label" => ucfirst(self::ANIMAL_SPECIE_DOG),
+            ],
+            [
+                "key" => self::ANIMAL_SPECIE_CAT,
+                "label" => ucfirst(self::ANIMAL_SPECIE_CAT),
+            ],
+            [
+                "key" => self::ANIMAL_SPECIE_BIRD,
+                "label" => ucfirst(self::ANIMAL_SPECIE_BIRD),
+            ],
+            [
+                "key" => self::ANIMAL_SPECIE_FISH,
+                "label" => ucfirst(self::ANIMAL_SPECIE_FISH),
+            ],
+            [
+                "key" => self::ANIMAL_SPECIE_LIZARD,
+                "label" => ucfirst(self::ANIMAL_SPECIE_LIZARD),
+            ],
+        ];
+    }
 }
