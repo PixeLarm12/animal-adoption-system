@@ -36,14 +36,17 @@ export default {
             this.getCatalog();
         }
     },
+
     components: {
         PageTemplate
     },
+
     computed: {
         getPageTitle() {
             return this.catalog.id ? `Edit ${this.catalog.title}` : 'Create catalog';
         },
     },
+
     data() {
         return {
             headers: {
@@ -57,6 +60,7 @@ export default {
             },
         }
     },
+    
     methods: {
          getCatalog() {
             axios.get(`http://localhost/api/catalogs/${this.$route.params.id}`)
