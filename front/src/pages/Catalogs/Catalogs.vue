@@ -6,13 +6,13 @@
             <button @click="showTable = !showTable" class="default-button mb-5">{{ getShowButtonTitle }}</button>
         </div>
         
-        <div v-show="!showTable && catalogs" class="w-8/12 flex flex-row justify-center items-center gap-4 flex-wrap">
+        <div v-show="!showTable && catalogs.length > 0" class="w-8/12 flex flex-row justify-center items-center gap-4 flex-wrap">
             <router-link v-for="catalog in catalogs" :key="catalog.id" :to="'/catalogs/edit/' + catalog.id" class="bg-catalog-card">
                 <h2 class="text-bold text-xl">{{ catalog.title }}</h2>
             </router-link>
         </div>
 
-        <div v-show="showTable && catalogs" class="w-8/12 flex flex-row justify-center items-center gap-4">
+        <div v-show="showTable && catalogs.length > 0" class="w-8/12 flex flex-row justify-center items-center gap-4">
             <table-template :headers="tableHeaders">
                 <tr v-for="catalog in catalogs" :key="catalog.id" class="w-full border border-black divide-x-2 divide-black">
                     <td class="lg:pl-3 pl-1 h-10 w-4/12">
@@ -31,7 +31,7 @@
             </table-template>
         </div>
 
-        <div v-if="!catalogs" class="w-8/12 flex justify-center items-center">
+        <div v-if="catalogs.length <= 0" class="w-8/12 flex justify-center items-center">
             <h3 class="text-xl text-red-600 font-bold">Sorry, but we don't have any active catalogs to show...</h3>
         </div>
     </page-template>
