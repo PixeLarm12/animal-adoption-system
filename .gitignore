@@ -17,3 +17,5 @@ api/yarn-error.log
 api/.fleet
 api/.idea
 api/.vscode
+
+front/node_modules
