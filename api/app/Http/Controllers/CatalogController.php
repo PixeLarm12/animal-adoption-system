@@ -21,6 +21,12 @@ class CatalogController extends Controller
         return response()->json($this->catalogRepository->all(), 200);
     }
 
+    public function show($id): JsonResponse
+    {
+        return response()->json($this->catalogRepository->find($id), 200);
+    }
+
+
     public function store(CatalogRequest $request): JsonResponse
     {
         if($request->validated())

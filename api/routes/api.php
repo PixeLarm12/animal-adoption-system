@@ -26,7 +26,8 @@ Route::prefix('animals')->name('animals.')->group(function () {
     Route::post('/', [AnimalController::class, 'store'])->name('store');
 });
 
+Route::apiResource('/catalogs',  CatalogController::class)->names('catalogs');
+
 Route::apiResource('/users',  UserController::class)->names('users');
 Route::apiResource('/adoptions',  AdoptionController::class)->names('adoptions');
-Route::apiResource('/catalogs',  CatalogController::class)->names('catalogs');
 

@@ -50,7 +50,8 @@ export default {
     data() {
         return {
             headers: {
-                'Content-Type': "multipart/form-data;"
+                'Content-Type': "application/json;",
+                'Accept': "application/json;"
             },
             errors: [],
             catalog: {
@@ -62,8 +63,8 @@ export default {
     },
     
     methods: {
-         getCatalog() {
-            axios.get(`http://localhost/api/catalogs/${this.$route.params.id}`)
+         async getCatalog() {
+            await axios.get(`http://localhost/api/catalogs/${this.$route.params.id}`)
                 .then((response) => {
                     this.catalog.id = response.data.id;
                     this.catalog.title = response.data.title;
@@ -72,8 +73,8 @@ export default {
                 .catch(error => console.log(error));
         },
 
-        update() {
-            axios.put(`http://localhost/api/catalogs/${this.catalog.id}`, {
+        async update() {
+            await axios.put(`http://localhost/api/catalogs/${this.catalog.id}`, {
                     "id": this.catalog.id,
                     "title": this.catalog.title,
                     "description": this.catalog.description,
@@ -88,8 +89,8 @@ export default {
                 .catch(error => console.log(error));
         },
 
-        save() {
-            axios.post("http://localhost/api/catalogs/", {
+        async save() {
+            await axios.post("http://localhost/api/catalogs/", {
                 "title": this.catalog.title,
                 "description": this.catalog.description,
             }, { headers: this.headers })
@@ -124,8 +125,9 @@ export default {
             if(this.validation()) {
                 if(this.$route.params.id) {
                     this.update();
+                } else {
+                    this.save();
                 }
-                this.save();
             }
         },
     }
