@@ -5,14 +5,26 @@ import './css/output.css'
 import App from './App.vue'
 import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
-import Catalog from './pages/Catalog.vue'
-import CatalogDetail from './pages/CatalogDetail.vue'
+import Catalogs from './pages/Catalogs/Catalogs.vue'
+import CatalogCreateOrEdit from './pages/Catalogs/CatalogCreateOrEdit.vue'
+import CatalogDetail from './pages/Catalogs/CatalogDetail.vue'
+import Animals from './pages/Animals/Animals.vue'
+import AnimalCreateOrEdit from './pages/Animals/AnimalCreateOrEdit.vue'
+import Adoptions from './pages/Adoptions/Adoptions.vue'
+import AdoptionCreateOrEdit from './pages/Adoptions/AdoptionCreateOrEdit.vue'
 
 const routes = [
     { path: '/', name: "home", component: Home, meta: { title: 'Home'} },
     { path: '/login', name: "login", component: Login, meta: { title: 'Login'} },
-    { path: '/catalogs', name: "catalog", component: Catalog, meta: { title: 'Catalog'} },
-    { path: '/catalogs/detail/:id', name: "catalog-detail", component: CatalogDetail, meta: { title: 'CatalogDetail'} },
+    { path: '/catalogs', name: "catalogs", component: Catalogs, meta: { title: 'Catalogs'} },
+    { path: '/catalogs/create', name: "catalogs-create", component: CatalogCreateOrEdit, meta: { title: 'CatalogCreateOrEdit'} },
+    { path: '/catalogs/edit/:id', name: "catalogs-edit", component: CatalogCreateOrEdit, meta: { title: 'CatalogCreateOrEdit'} },
+    { path: '/catalogs/detail/:id', name: "catalogs-detail", component: CatalogDetail, meta: { title: 'CatalogDetail'} },
+    { path: '/animals', name: "animals", component: Animals, meta: { title: 'Animals'} },
+    { path: '/animals/create', name: "animals-create", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
+    { path: '/animals/edit/:id', name: "animals-edit", component: AnimalCreateOrEdit, meta: { title: 'AnimalCreateOrEdit'} },
+    { path: '/adoptions', name: "adoptions", component: Adoptions, meta: { title: 'Adoptions'} },
+    { path: '/adoptions/create', name: "adoptions-create", component: AdoptionCreateOrEdit, meta: { title: 'AdoptionCreateOrEdit'} },
 ]
 
 const router = createRouter({

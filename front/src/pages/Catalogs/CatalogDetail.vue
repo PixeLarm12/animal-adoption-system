@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import PageTemplate from "../components/PageTemplate.vue"
+import PageTemplate from "../../components/PageTemplate.vue"
 
 export default {
     components: {
