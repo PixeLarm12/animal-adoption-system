@@ -129,7 +129,7 @@ export default {
             await axios.get(`http://localhost/api/animals/get-form-select-options`)
                 .then((response) => {
                     console.log(response.data);
-                    this.adoptionsStatusOptions = response.data['adoptionStatusOptions']
+                    this.adoptionsStatusOptions = response.data['adoptionsStatusOptions']
                     this.speciesOptions = response.data['speciesOptions']
                 })
                 .catch(error => console.log(error));

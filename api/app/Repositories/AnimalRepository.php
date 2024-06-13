@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Adoption;
 use App\Models\Animal;
+use Illuminate\Database\Eloquent\Collection;
 
 class AnimalRepository extends BaseRepository
 {
@@ -14,6 +15,11 @@ class AnimalRepository extends BaseRepository
     public function find(int $id): ?Animal
     {
         return Animal::where('id',$id)->with(['vaccines','medicalInformations'])->firstOrFail();
+    }
+
+    public function getAnimalsAbleToAdopt(): Collection
+    {
+        return Animal::ableToAdopt()->get();
     }
 
     public function save(array $data): Animal
@@ -37,7 +43,7 @@ class AnimalRepository extends BaseRepository
 
         return [
             "speciesOptions" => $this->getSpecies(),
-            "adoptionStatusOptions" => $adoptionRepository->getAdoptionStatus(),
+            "adoptionsStatusOptions" => $adoptionRepository->getAdoptionStatus(),
         ];
     }
 
