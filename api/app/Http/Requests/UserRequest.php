@@ -12,7 +12,7 @@ class UserRequest extends FormRequest
             'name' => 'required|string|min:3|max:60',
             'email' => 'required|email',
             'password' => 'required_if:id,null|confirmed|min:8|max:400',
-            'cpf' => 'required|unique',
+            'cpf' => 'required|unique:users',
             'birth_date' => 'required|date',
             'phones' => 'required|array|min:1',
             'addresses' => 'required|array|min:1',
