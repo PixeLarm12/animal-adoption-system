@@ -1,7 +1,7 @@
 <template>
     <page-template :title="getPageTitle">
-        <div class="w-8/12 py-6 flex flex-col justify-center items-center bg-gray-100 shadow-md border border-gray-600 rounded-md">
-            <form @submit.prevent="submit()" class="w-full min-h-[100vh] flex flex-col justify-center items-center">
+        <form @submit.prevent="submit()" class="w-full min-h-[50vh] flex flex-col justify-center items-center">
+            <div class="w-8/12 py-6 flex flex-col justify-center items-center bg-gray-100 shadow-md border border-gray-600 rounded-md">
                 <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-y-10">
                     <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
                         <label for="name" class="text-default-gray font-bold text-lg">Name <span class="text-xl text-red-600 font-bold">*</span></label>
@@ -55,8 +55,8 @@
                         <button type="submit" class="w-full default-button">Save</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </page-template>
 </template>
 
