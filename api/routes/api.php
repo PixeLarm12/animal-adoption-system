@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('/catalogs',  CatalogController::class)->names('catalogs');
-Route::apiResource('/users',  UserController::class)->names('users');
+Route::apiResource('/users',  UserController::class)->only(['index', 'store', 'destroy'])->names('users');
 
 Route::prefix('animals')->name('animals.')->group(function () {
     Route::get('/get-form-select-options', [AnimalController::class, 'getFormSelectOptions'])->name('getFormSelectOptions');

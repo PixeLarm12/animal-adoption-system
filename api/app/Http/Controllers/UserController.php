@@ -29,14 +29,6 @@ class UserController extends Controller
         return response()->json(["message" => "Validation error!"], 403);
     }
 
-    public function update(UserRequest $request, User $user): JsonResponse
-    {
-        if($request->validated())
-            return response()->json($this->userRepository->update($user, $request->getData()), 200);
-
-        return response()->json(["message" => "Validation error!"], 403);
-    }
-
     public function destroy(User $user): JsonResponse
     {
         return response()->json($this->userRepository->delete($user), 200);
