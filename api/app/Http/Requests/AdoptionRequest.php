@@ -13,7 +13,7 @@ class AdoptionRequest extends FormRequest
             'person_id' => 'required|integer',
             'status' => 'required|string|min:3|max:20',
             'adoption_date' => 'required|date',
-            'observation' => 'sometimes|required|string|min:3|max:255',
+            'observation' => 'sometimes|nullable|string|min:3|max:255',
         ];
     }
 

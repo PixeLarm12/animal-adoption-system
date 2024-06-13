@@ -21,6 +21,11 @@ class AdoptionController extends Controller
         return response()->json($this->adoptionRepository->all(), 200);
     }
 
+    public function show($id): JsonResponse
+    {
+        return response()->json($this->adoptionRepository->find($id), 200);
+    }
+
     public function store(AdoptionRequest $request): JsonResponse
     {
         if($request->validated())
@@ -40,5 +45,10 @@ class AdoptionController extends Controller
     public function destroy(Adoption $adoption): JsonResponse
     {
         return response()->json($this->adoptionRepository->delete($adoption), 200);
+    }
+
+    public function getFormSelectOptions(): JsonResponse
+    {
+        return response()->json($this->adoptionRepository->getFormSelectOptions(), 200);
     }
 }

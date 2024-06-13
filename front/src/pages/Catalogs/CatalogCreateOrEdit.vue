@@ -63,7 +63,7 @@ export default {
     },
     
     methods: {
-         async getCatalog() {
+        async getCatalog() {
             await axios.get(`http://localhost/api/catalogs/${this.$route.params.id}`)
                 .then((response) => {
                     this.catalog.id = response.data.id;

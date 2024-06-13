@@ -30,6 +30,11 @@ class Animal extends Model
         'birth_date',
     ];
 
+    public function scopeAbleToAdopt($query)
+    {
+        return $query->where('adoption_status', Adoption::ADOPTION_STATUS_NOT_STARTED);
+    }
+
     public function adoption(): BelongsTo
     {
         return $this->belongsTo(Adoption::class);
