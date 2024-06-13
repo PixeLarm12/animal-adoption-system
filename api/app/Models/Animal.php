@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Animal extends Model
 {
-    const ANIMAL_SEX_FEMALE = 'female';
-    const ANIMAL_SEX_MALE = 'male';
+    const ANIMAL_SEX_FEMALE = 'f';
+    const ANIMAL_SEX_MALE = 'm';
 
     const ANIMAL_SPECIE_DOG = 'dog';
     const ANIMAL_SPECIE_CAT = 'cat';

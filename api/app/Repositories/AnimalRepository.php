@@ -43,7 +43,6 @@ class AnimalRepository extends BaseRepository
 
         return [
             "speciesOptions" => $this->getSpecies(),
-            "adoptionsStatusOptions" => $adoptionRepository->getAdoptionStatus(),
         ];
     }
 

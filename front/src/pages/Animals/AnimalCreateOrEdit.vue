@@ -3,20 +3,12 @@
         <form @submit.prevent="submit()" class="w-full min-h-[50vh] flex flex-col justify-center items-center">
             <div class="w-8/12 py-6 flex flex-col justify-center items-center bg-gray-100 shadow-md border border-gray-600 rounded-md">
                 <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-y-10">
-                    <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
+                    <div class="col-span-12 lg:col-span-4 w-8/12 flex justify-start items-center text-left flex-wrap">
                         <label for="name" class="text-default-gray font-bold text-lg">Name <span class="text-xl text-red-600 font-bold">*</span></label>
                         <input v-model="animal.name" type="name" name="name" id="name" placeholder="Type animal's name..." class="default-input" required>
                     </div>
-
-                    <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
-                        <label for="sex" class="text-default-gray font-bold text-lg">Select Sex <span class="text-xl text-red-600 font-bold">*</span></label>
-                        <select v-model="animal.sex" class="default-input" name="sex" id="sex" required>
-                            <option value="m" selected>Male</option>
-                            <option value="f">Female</option>
-                        </select>
-                    </div>
-
-                    <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
+                    
+                    <div class="col-span-12 lg:col-span-4 w-8/12 flex justify-start items-center text-left flex-wrap">
                         <label for="specie" class="text-default-gray font-bold text-lg">Select Specie <span class="text-xl text-red-600 font-bold">*</span></label>
                         <select v-model="animal.specie" class="default-input" name="specie" id="specie" required>
                             <option value="" selected>Select animal's specie...</option>
@@ -24,11 +16,11 @@
                         </select>
                     </div>
 
-                    <div class="col-span-12 lg:col-span-6 w-8/12 flex justify-start items-center text-left flex-wrap">
-                        <label for="adoption-status" class="text-default-gray font-bold text-lg">Select Adoption Status <span class="text-xl text-red-600 font-bold">*</span></label>
-                        <select v-model="animal.adoption_status" class="default-input" name="adoption-status" id="adoption-status" required>
-                            <option value="" selected>Select animal's adoption status...</option>
-                            <option v-for="(status, index) in adoptionsStatusOptions" :key="index" :value="status.key">{{ status.label }}</option>
+                    <div class="col-span-12 lg:col-span-4 w-8/12 flex justify-start items-center text-left flex-wrap">
+                        <label for="sex" class="text-default-gray font-bold text-lg">Select Sex <span class="text-xl text-red-600 font-bold">*</span></label>
+                        <select v-model="animal.sex" class="default-input" name="sex" id="sex" required>
+                            <option value="m" selected>Male</option>
+                            <option value="f">Female</option>
                         </select>
                     </div>
 
@@ -92,7 +84,6 @@ export default {
             errors: [],
             animal: {
                 id: '',
-                adoption_status: '',
                 name: '',
                 specie: '',
                 sex: '',
@@ -102,7 +93,6 @@ export default {
                 vaccines: [],
                 medical_informations: [],
             },
-            adoptionsStatusOptions: [],
             speciesOptions: [],
         }
     },
@@ -112,7 +102,6 @@ export default {
             await axios.get(`http://localhost/api/animals/${this.$route.params.id}`)
                 .then((response) => {
                     this.animal.id = response.data.id;
-                    this.animal.adoption_status = response.data.adoption_status;
                     this.animal.name = response.data.name;
                     this.animal.specie = response.data.specie;
                     this.animal.sex = response.data.sex;
@@ -129,7 +118,6 @@ export default {
             await axios.get(`http://localhost/api/animals/get-form-select-options`)
                 .then((response) => {
                     console.log(response.data);
-                    this.adoptionsStatusOptions = response.data['adoptionsStatusOptions']
                     this.speciesOptions = response.data['speciesOptions']
                 })
                 .catch(error => console.log(error));
@@ -138,7 +126,6 @@ export default {
         async update() {
             await axios.put(`http://localhost/api/animals/${this.animal.id}`, {
                     "id": this.animal.id,
-                    "adoption_status": this.animal.adoption_status,
                     "name": this.animal.name,
                     "specie": this.animal.specie,
                     "sex": this.animal.sex,
@@ -160,7 +147,6 @@ export default {
 
         async save() {
             await axios.post("http://localhost/api/animals/", {
-                "adoption_status": this.animal.adoption_status,
                 "name": this.animal.name,
                 "specie": this.animal.specie,
                 "sex": this.animal.sex,
@@ -186,11 +172,6 @@ export default {
             
             if(this.animal.name === "" || !(this.animal.name.length >= 3 && this.animal.name.length <= 80)) {
                 this.errors.push("The TITLE field are required and must be at least 3 characters and max of 80.");
-                validator++;
-            }
-
-            if(this.animal.adoption_status === "") {
-                this.errors.push("The ADOPTION STATUS field are required.");
                 validator++;
             }
 

@@ -23,6 +23,17 @@ class Adoption extends Model
         'observation',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::updated(function ($model) {
+            $model->animal()->update([
+                'adoption_status' => $model->status,
+            ]);
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id', 'person_id');
