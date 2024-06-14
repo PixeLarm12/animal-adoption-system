@@ -10,7 +10,7 @@
             <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-4 py-5">
                 <div class="col-span-12 w-full flex justify-start items-center text-left flex-wrap">
                     <label for="medical-info-description" class="text-default-gray font-bold text-lg">Description <span class="text-xl text-red-600 font-bold">*</span></label>
-                    <textarea v-model="tempMedicalInformation.description" name="medical-info-description" id="medical-info-description" placeholder="Type medical information description..." class="default-input resize-none" required></textarea>
+                    <textarea v-model="tempMedicalInformation.description" name="medical-info-description" id="medical-info-description" placeholder="Type medical information description..." class="default-input resize-none"></textarea>
                 </div>
 
                 <div class="col-span-12 w-full flex flex-row justify-end items-end self-end text-left">
