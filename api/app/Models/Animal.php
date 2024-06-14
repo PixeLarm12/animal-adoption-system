@@ -52,6 +52,17 @@ class Animal extends Model
         return $query->doesntHave('adoption');
     }
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::deleting(function ($model) {
+            $model->vaccines()->delete();
+            $model->adoption()->delete();
+            $model->medicalInformations()->delete();
+        });
+    }
+
     public function adoption(): HasOne
     {
         return $this->hasOne(Adoption::class, 'animal_id');

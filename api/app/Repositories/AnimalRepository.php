@@ -41,6 +41,25 @@ class AnimalRepository extends BaseRepository
         return $animal;
     }
 
+    public function updateAndSync(Animal $animal, array $data)
+    {
+        $animal->update($data);
+
+        $animal->vaccines()->delete();
+
+        if($data["vaccines"]) {
+            $animal->vaccines()->createMany($data['vaccines']);
+        }
+
+        $animal->medicalInformations()->delete();
+
+        if($data["medical_informations"]) {
+            $animal->medicalInformations()->createMany($data['medical_informations']);
+        }
+
+        return $animal;
+    }
+
     public function getFormSelectOptions(): array
     {
         return [

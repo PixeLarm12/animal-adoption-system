@@ -23,10 +23,12 @@ class CatalogRepository extends BaseRepository
 
     public function updateAndSync(Catalog $catalog, array $data)
     {
+        $catalog->update($data);
+
         if($data['animals']) {
             $catalog->animals()->sync($data['animals']);
         }
 
-        return $catalog->update($data);
+        return $catalog;
     }
 }

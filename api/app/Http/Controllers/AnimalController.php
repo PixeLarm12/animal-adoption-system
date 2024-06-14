@@ -37,7 +37,7 @@ class AnimalController extends Controller
     public function update(AnimalRequest $request, Animal $animal): JsonResponse
     {
         if($request->validated())
-            return response()->json($this->animalRepository->update($animal, $request->getData()), 200);
+            return response()->json($this->animalRepository->updateAndSync($animal, $request->getData()), 200);
 
         return response()->json(["message" => "Validation error!"], 403);
     }
