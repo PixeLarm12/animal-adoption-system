@@ -84,6 +84,9 @@
                                 <td class="lg:pl-3 pl-1 h-5 w-6/12">
                                     {{ vaccine.date }}
                                 </td>
+                                <td class="lg:pl-3 pl-1 h-5 w-6/12">
+                                    <span @click="removeVaccine(index)" class="hover:underline text-red-500 uppercase">Remove</span>
+                                </td>
                             </tr>  
                         </input-array-component-template>
                     </div>
@@ -157,7 +160,8 @@ export default {
             vaccinesHeaders: [
                 "Index",
                 "Title",
-                "Date"
+                "Date",
+                "Delete"
             ],
             tempVaccine: {
                 title: '',
@@ -297,6 +301,10 @@ export default {
                     description: '',
                 };
             }
+        },
+
+        removeVaccine(position) {
+            this.animal.vaccines.splice(position, 1);
         },
 
         submit() {
