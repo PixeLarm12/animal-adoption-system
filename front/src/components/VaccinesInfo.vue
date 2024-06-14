@@ -1,9 +1,11 @@
 <template>
-    <div class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap gap-x-10 grid grid-cols-12 place-content-center place-items-center">
+    <div class="col-span-12 w-11/12 justify-start items-center text-left flex-wrap gap-x-10 grid grid-cols-12 place-content-center place-items-center">
         <div class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap gap-x-10">
             <h3 class="text-default-gray font-bold text-lg">Vaccines</h3>
 
             <span @click="showVaccines = !showVaccines" class="w-3/12 default-input-array-button">{{ getVaccinesTitle }}</span>
+
+            <span class="w-full text-lg">Total: {{ vaccines.length }}</span>
         </div>
 
         <div v-if="showVaccines" class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap">
@@ -33,7 +35,7 @@
                 </div>
             </div>
 
-            <input-array-component-template :headers="vaccinesHeaders">
+            <input-array-component-template v-if="vaccines.length > 0" :headers="vaccinesHeaders">
                 <tr v-for="(vaccine, index) in vaccines" :key="index" class="w-full border border-gray-400 divide-x-2 divide-gray-400">
                     <td class="lg:pl-3 pl-1 h-5 w-4/12">
                         {{ (index+1) }}
@@ -45,10 +47,12 @@
                         {{ vaccine.date }}
                     </td>
                     <td class="lg:pl-3 pl-1 h-5 w-6/12">
-                        <span @click="removeVaccine(index)" class="hover:underline text-red-500 uppercase">Remove</span>
+                        <span @click="removeVaccine(vaccine)" class="hover:underline text-red-500 uppercase">Remove</span>
                     </td>
                 </tr>  
             </input-array-component-template>
+
+            <span v-else class="text-lg text-red-500">The animal does not have vaccines added.</span>
         </div>
     </div>
 </template>
@@ -62,7 +66,7 @@ export default {
     },
     computed: {
         getVaccinesTitle() {
-            return this.showVaccines ? 'Hide Vaccines' : 'Show Vaccines';
+            return this.showVaccines ? 'Clear Vaccines' : 'Show Vaccines';
         },
     },
     watch: {
@@ -105,7 +109,7 @@ export default {
     },
     methods: {
         addVaccine() {
-            if(this.tempVaccine.title !== '', this.tempVaccine.date !== '') {
+            if(this.tempVaccine.title !== '' && this.tempVaccine.date !== '') {
                 const newVaccine = {
                     title: this.tempVaccine.title,
                     date: this.tempVaccine.date,
@@ -126,10 +130,9 @@ export default {
             }
         },
 
-        removeVaccine(position) {
-            const oldVaccines = this.vaccines;
-            const newVaccines = oldVaccines.splice(position, 1);
-
+        removeVaccine(object) {
+            const newVaccines = this.vaccines.filter(el => el.title !== object.title);
+            
             this.$emit('update-vaccines', newVaccines);
         },
     }

@@ -40,6 +40,8 @@
                     </div>
 
                     <vaccines-info :vaccines="animal.vaccines" @update-vaccines="updateVaccines"></vaccines-info>
+                    
+                    <medical-informations-info :medical-informations="animal.medical_informations" @update-medical-information="updateMedicalInformation"></medical-informations-info>
 
                     <div v-show="errors.length > 0" class="col-span-12 flex flex-col justify-start items-start text-left">
                         <span v-for="(error, index) in errors" :key="index" class="text-red-500 font-semibold">{{ error }}</span>
@@ -58,6 +60,7 @@
 import axios from 'axios';
 import PageTemplate from "../../components/PageTemplate.vue"
 import VaccinesInfo from '../../components/VaccinesInfo.vue';
+import MedicalInformationsInfo from '../../components/MedicalInformationsInfo.vue';
 
 export default {
     beforeMount() {
@@ -70,7 +73,8 @@ export default {
 
     components: {
         PageTemplate,
-        VaccinesInfo
+        VaccinesInfo,
+        MedicalInformationsInfo
     },
 
     computed: {
@@ -121,7 +125,6 @@ export default {
         async getFormSelectOptions() {
             await axios.get(`http://localhost/api/animals/get-form-select-options`)
                 .then((response) => {
-                    console.log(response.data);
                     this.speciesOptions = response.data['speciesOptions']
                 })
                 .catch(error => console.log(error));
@@ -214,6 +217,10 @@ export default {
 
         updateVaccines(newVaccines) {
             this.animal.vaccines = newVaccines;
+        },
+
+        updateMedicalInformation(newMedicalInformations) {
+            this.animal.medical_informations = newMedicalInformations;
         }
     }
 }
