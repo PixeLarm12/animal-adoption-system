@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Adoption extends Model
 {
@@ -28,14 +27,20 @@ class Adoption extends Model
         parent::boot();
 
         self::created(function ($model) {
-            $model->animal()->update([
+            $model->animal->update([
                 'adoption_status' => $model->status,
             ]);
         });
 
         self::updated(function ($model) {
-            $model->animal()->update([
+            $model->animal->update([
                 'adoption_status' => $model->status,
+            ]);
+        });
+
+        self::deleted(function ($model) {
+            $model->animal->update([
+                'adoption_status' => self::ADOPTION_STATUS_NOT_STARTED,
             ]);
         });
     }
@@ -45,9 +50,9 @@ class Adoption extends Model
         return $this->belongsTo(User::class, 'person_id', 'id');
     }
 
-    public function animal(): HasOne
+    public function animal(): BelongsTo
     {
-        return $this->hasOne(Animal::class, 'id', 'animal_id');
+        return $this->belongsTo(Animal::class, 'animal_id', 'id');
     }
 
     public static function getAdoptionStatus()

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Animal extends Model
 {
@@ -30,14 +30,15 @@ class Animal extends Model
         'birth_date',
     ];
 
+
     public function scopeAbleToAdopt($query)
     {
-        return $query->where('adoption_status', Adoption::ADOPTION_STATUS_NOT_STARTED);
+        return $query->doesntHave('adoption');
     }
 
-    public function adoption(): BelongsTo
+    public function adoption(): HasOne
     {
-        return $this->belongsTo(Adoption::class);
+        return $this->hasOne(Adoption::class, 'animal_id');
     }
 
     public function vaccines(): HasMany
