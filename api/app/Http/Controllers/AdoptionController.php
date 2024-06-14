@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AdoptionRequest;
 use App\Models\Adoption;
+use App\Models\Animal;
 use App\Repositories\AdoptionRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -23,7 +24,7 @@ class AdoptionController extends Controller
 
     public function show($id): JsonResponse
     {
-        return response()->json($this->adoptionRepository->find($id), 200);
+        return response()->json($this->adoptionRepository->find($id, ['user','animal']), 200);
     }
 
     public function store(AdoptionRequest $request): JsonResponse
@@ -47,8 +48,8 @@ class AdoptionController extends Controller
         return response()->json($this->adoptionRepository->delete($adoption), 200);
     }
 
-    public function getFormSelectOptions(): JsonResponse
+    public function getFormSelectOptions($id): JsonResponse
     {
-        return response()->json($this->adoptionRepository->getFormSelectOptions(), 200);
+        return response()->json($this->adoptionRepository->getFormSelectOptions($id), 200);
     }
 }

@@ -12,14 +12,18 @@ class AnimalRepository extends BaseRepository
         parent::__construct($model);
     }
 
-    public function find(int $id): ?Animal
+    public function getAnimalsAbleToAdopt($animalId = -1): Collection
     {
-        return Animal::where('id',$id)->with(['vaccines','medicalInformations'])->firstOrFail();
-    }
+        $animalsToAdopt = Animal::ableToAdopt()->get();
 
-    public function getAnimalsAbleToAdopt(): Collection
-    {
-        return Animal::ableToAdopt()->get();
+        if($animalId != -1) {
+            $actualAnimal = $this->find($animalId);
+
+            if($actualAnimal)
+                $animalsToAdopt->push($actualAnimal);
+        }
+
+        return $animalsToAdopt;
     }
 
     public function save(array $data): Animal
@@ -39,8 +43,6 @@ class AnimalRepository extends BaseRepository
 
     public function getFormSelectOptions(): array
     {
-        $adoptionRepository = new AdoptionRepository(new Adoption());
-
         return [
             "speciesOptions" => $this->getSpecies(),
         ];

@@ -27,6 +27,12 @@ class Adoption extends Model
     {
         parent::boot();
 
+        self::created(function ($model) {
+            $model->animal()->update([
+                'adoption_status' => $model->status,
+            ]);
+        });
+
         self::updated(function ($model) {
             $model->animal()->update([
                 'adoption_status' => $model->status,
@@ -36,12 +42,12 @@ class Adoption extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'person_id');
+        return $this->belongsTo(User::class, 'person_id', 'id');
     }
 
     public function animal(): HasOne
     {
-        return $this->hasOne(Animal::class);
+        return $this->hasOne(Animal::class, 'id', 'animal_id');
     }
 
     public static function getAdoptionStatus()

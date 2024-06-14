@@ -23,7 +23,7 @@ class AnimalController extends Controller
 
     public function show($id): JsonResponse
     {
-        return response()->json($this->animalRepository->find($id), 200);
+        return response()->json($this->animalRepository->find($id, ['vaccines','medicalInformations']), 200);
     }
 
     public function store(AnimalRequest $request): JsonResponse

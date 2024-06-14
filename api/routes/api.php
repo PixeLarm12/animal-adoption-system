@@ -30,10 +30,10 @@ Route::prefix('animals')->name('animals.')->group(function () {
 });
 
 Route::prefix('adoptions')->name('adoptions.')->group(function () {
-    Route::get('/get-form-select-options', [AdoptionController::class, 'getFormSelectOptions'])->name('getFormSelectOptions');
+    Route::get('/get-form-select-options/{animalId}', [AdoptionController::class, 'getFormSelectOptions'])->name('getFormSelectOptions');
     Route::get('/', [AdoptionController::class, 'index'])->name('index');
-    Route::get('/{animal}', [AdoptionController::class, 'show'])->name('show');
-    Route::put('/{animal}', [AdoptionController::class, 'update'])->name('update');
-    Route::delete('/{animal}', [AdoptionController::class, 'destroy'])->name('destroy');
+    Route::get('/{adoption}', [AdoptionController::class, 'show'])->name('show');
+    Route::put('/{adoption}', [AdoptionController::class, 'update'])->name('update');
+    Route::delete('/{adoption}', [AdoptionController::class, 'destroy'])->name('destroy');
     Route::post('/', [AdoptionController::class, 'store'])->name('store');
 });
