@@ -23,7 +23,7 @@ class CatalogController extends Controller
 
     public function show($id): JsonResponse
     {
-        return response()->json($this->catalogRepository->find($id), 200);
+        return response()->json($this->catalogRepository->find($id, ['animals']), 200);
     }
 
     public function store(CatalogRequest $request): JsonResponse

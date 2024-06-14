@@ -33,8 +33,8 @@
                     </div>
 
                     <div class="col-span-12 w-8/12 flex justify-start items-center text-left flex-wrap">
-                        <label for="description" class="text-default-gray font-bold text-lg">Description <span class="text-xl text-red-600 font-bold">*</span></label>
-                        <textarea v-model="adoption.description" name="description" id="description" placeholder="Type description..." class="default-input resize-none" required></textarea>
+                        <label for="observation" class="text-default-gray font-bold text-lg">Observation</label>
+                        <textarea v-model="adoption.observation" name="observation" id="observation" placeholder="Type observation..." class="default-input resize-none"></textarea>
                     </div>
 
                     <div v-show="errors.length > 0" class="col-span-12 flex flex-col justify-start items-start text-left">
@@ -107,7 +107,7 @@ export default {
         },
 
         async getFormSelectOptions() {
-            await axios.get(`http://localhost/api/adoptions/get-form-select-options`)
+            await axios.get(`http://localhost/api/adoptions/get-form-select-options/${this.$route.params.id ?? -1}`)
                 .then((response) => {
                     console.log(response.data);
                     this.adoptionsStatusOptions = response.data['adoptionsStatusOptions']

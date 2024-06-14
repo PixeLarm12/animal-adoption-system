@@ -7,7 +7,7 @@
         </div>
         
         <div v-show="!showTable && catalogs.length > 0" class="w-8/12 flex flex-row justify-center items-center gap-4 flex-wrap">
-            <router-link v-for="catalog in catalogs" :key="catalog.id" :to="'/catalogs/edit/' + catalog.id" class="bg-catalog-card">
+            <router-link v-for="catalog in catalogs" :key="catalog.id" :to="'/catalogs/detail/' + catalog.id" class="bg-catalog-card">
                 <h2 class="text-bold text-xl">{{ catalog.title }}</h2>
             </router-link>
         </div>
