@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AdoptionRequest;
 use App\Models\Adoption;
-use App\Models\Animal;
 use App\Repositories\AdoptionRepository;
 use Illuminate\Http\JsonResponse;
 

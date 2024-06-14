@@ -22,6 +22,30 @@ class Adoption extends Model
         'observation',
     ];
 
+    protected $appends = [
+        'animal_name_append',
+        'person_name_append',
+        'status_formatted',
+    ];
+
+    public function getAnimalNameAppendAttribute() {
+        $animal = $this->animal;
+
+        return $animal->name;
+    }
+
+    public function getPersonNameAppendAttribute() {
+        $user = $this->user;
+
+        return $user->name;
+    }
+
+    public function getStatusFormattedAttribute() {
+        $status = self::getStatusByKey($this->attributes['status']);
+
+        return $status ? $status['label'] : "";
+    }
+
     public static function boot()
     {
         parent::boot();
@@ -53,6 +77,17 @@ class Adoption extends Model
     public function animal(): BelongsTo
     {
         return $this->belongsTo(Animal::class, 'animal_id', 'id');
+    }
+
+    public static function getStatusByKey($key)
+    {
+        $status = self::getAdoptionStatus();
+
+        foreach($status as $el) {
+            if($el['key'] == $key) {
+                return $el;
+            }
+        }
     }
 
     public static function getAdoptionStatus()

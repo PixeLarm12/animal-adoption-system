@@ -7,13 +7,13 @@
                 <table-template v-if="adoptions.length > 0" :headers="tableHeaders">
                     <tr v-for="adoption in adoptions" :key="adoption.id" class="w-full border border-black divide-x-2 divide-black">
                         <td class="lg:pl-3 pl-1 h-10 w-4/12">
-                            {{ adoption.animal }}
+                            {{ adoption.animal_name_append }}
                         </td>
                         <td class="lg:pl-3 pl-1 h-10 w-2/12">
-                            {{ adoption.person }}
+                            {{ adoption.person_name_append }}
                         </td>
-                        <td class="lg:pl-3 pl-1 h-10 w-1/12">
-                            {{ adoption.status }}
+                        <td class="lg:pl-3 pl-1 h-10 w-1/12 font-bold" :class="getStatusColor(adoption.status)">
+                            {{ adoption.status_formatted }}
                         </td>
                         <td class="lg:pl-3 pl-1 h-10 w-2/12">
                             {{ adoption.adoption_date }}
@@ -61,6 +61,20 @@ export default {
                     }
                 })
                 .catch(error => console.log(`Error: ${error}`));
+        },
+        getStatusColor(status) {
+            if(status === 'not_started'){
+                return 'text-defaut-gray';
+            }
+            if(status === 'processing'){
+                return 'text-yellow-500';
+            }
+            if(status === 'accepted'){
+                return 'text-green-500';
+            }
+            if(status === 'not_accepted'){
+                return 'text-red-500';
+            }
         }
     },
 
