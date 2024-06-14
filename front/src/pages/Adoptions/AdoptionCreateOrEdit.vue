@@ -109,7 +109,6 @@ export default {
         async getFormSelectOptions() {
             await axios.get(`http://localhost/api/adoptions/get-form-select-options/${this.$route.params.id ?? -1}`)
                 .then((response) => {
-                    console.log(response.data);
                     this.adoptionsStatusOptions = response.data['adoptionsStatusOptions']
                     this.peopleOptions = response.data['peopleOptions']
                     this.animalsOptions = response.data['animalsOptions']
