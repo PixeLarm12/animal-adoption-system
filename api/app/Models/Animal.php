@@ -30,6 +30,22 @@ class Animal extends Model
         'birth_date',
     ];
 
+    protected $appends = [
+        'specie_formatted',
+        'adoption_status_formatted',
+    ];
+
+    public function getSpecieFormattedAttribute() {
+        $specie = self::getSpecieByKey($this->attributes['specie']);
+
+        return $specie ? $specie['label'] : "";
+    }
+
+    public function getAdoptionStatusFormattedAttribute() {
+        $status = Adoption::getStatusByKey($this->attributes['adoption_status']);
+
+        return $status ? $status['label'] : "";
+    }
 
     public function scopeAbleToAdopt($query)
     {
@@ -54,6 +70,17 @@ class Animal extends Model
     public function catalogs(): BelongsToMany
     {
         return $this->belongsToMany(Catalog::class, 'animals_catalogs', 'animal_id');
+    }
+
+    public static function getSpecieByKey($key)
+    {
+        $species = self::getSpecies();
+
+        foreach($species as $el) {
+            if($el['key'] == $key) {
+                return $el;
+            }
+        }
     }
 
     public static function getSpecies()

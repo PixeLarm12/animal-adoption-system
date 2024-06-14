@@ -10,13 +10,13 @@
                             {{ animal.name }}
                         </td>
                         <td class="lg:pl-3 pl-1 h-10 w-2/12">
-                            {{ animal.specie }}
+                            {{ animal.specie_formatted }}
                         </td>
-                        <td class="lg:pl-3 pl-1 h-10 w-1/12">
+                        <td class="lg:pl-3 pl-1 h-10 w-1/12 uppercase">
                             {{ animal.sex }}
                         </td>
-                        <td class="lg:pl-3 pl-1 h-10 w-2/12">
-                            {{ animal.adoption_status }}
+                        <td class="lg:pl-3 pl-1 h-10 w-2/12 font-bold" :class="getStatusColor(animal.adoption_status)">
+                            {{ animal.adoption_status_formatted }}
                         </td>
                         <td class="lg:pl-3 pl-1 h-10 w-1/12">
                             <div class="w-full flex justify-start lg:gap-6 gap-1">
@@ -73,6 +73,21 @@ export default {
                     }
                 })
                 .catch(error => console.log(`Error: ${error}`));
+        },
+
+        getStatusColor(status) {
+            if(status === 'not_started'){
+                return 'text-defaut-gray';
+            }
+            if(status === 'processing'){
+                return 'text-yellow-500';
+            }
+            if(status === 'accepted'){
+                return 'text-green-500';
+            }
+            if(status === 'not_accepted'){
+                return 'text-red-500';
+            }
         }
     }
 }
