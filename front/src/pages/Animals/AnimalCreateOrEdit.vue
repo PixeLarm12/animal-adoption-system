@@ -40,9 +40,13 @@
                     </div>
 
                     <!-- VACCINES -->
-                    <div class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap">
-                        <label for="vaccines" class="text-default-gray font-bold text-lg">Vaccines</label>
+                    <div class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap gap-x-10">
+                        <h3 class="text-default-gray font-bold text-lg">Vaccines</h3>
 
+                        <span @click="showVaccines = !showVaccines" class="w-3/12 default-input-array-button">{{ getVaccinesTitle }}</span>
+                    </div>
+
+                    <div v-if="showVaccines" class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap">
                         <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-4 py-5">
                             <div class="col-span-12 lg:col-span-6 w-full flex justify-start items-center text-left flex-wrap">
                                 <label for="vaccine-title" class="text-default-gray font-bold text-lg">Title <span class="text-xl text-red-600 font-bold">*</span></label>
@@ -121,6 +125,25 @@ export default {
         getPageTitle() {
             return this.animal.id ? `Edit ${this.animal.name}` : 'Create Animal';
         },
+        
+        getVaccinesTitle() {
+            return this.showVaccines ? 'Hide Vaccines' : 'Show Vaccines';
+        },
+    },
+
+    watch: {
+        showVaccines(oldVal, newVal) {
+            if((oldVal == false && newVal == true) && !this.$route.params.id) {
+                this.tempVaccine = {
+                    title: '',
+                    date: '',
+                    next: '',
+                    description: '',
+                };
+
+                this.animal.vaccines = [];
+            }
+        }
     },
 
     data() {
@@ -129,6 +152,7 @@ export default {
                 'Content-Type': "application/json;",
                 'Accept': "application/json;"
             },
+            showVaccines: false,
             errors: [],
             vaccinesHeaders: [
                 "Index",

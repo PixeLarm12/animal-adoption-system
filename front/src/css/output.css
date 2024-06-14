@@ -656,6 +656,10 @@ video {
   width: 100vw;
 }
 
+.w-3\/12{
+  width: 25%;
+}
+
 .resize-none{
   resize: none;
 }
@@ -708,6 +712,10 @@ video {
   justify-content: center;
 }
 
+.justify-between{
+  justify-content: space-between;
+}
+
 .justify-around{
   justify-content: space-around;
 }
@@ -727,6 +735,11 @@ video {
 
 .gap-y-10{
   row-gap: 2.5rem;
+}
+
+.gap-x-10{
+  -moz-column-gap: 2.5rem;
+       column-gap: 2.5rem;
 }
 
 .divide-x-2 > :not([hidden]) ~ :not([hidden]){
