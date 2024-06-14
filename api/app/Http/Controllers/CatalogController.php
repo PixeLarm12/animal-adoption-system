@@ -37,7 +37,7 @@ class CatalogController extends Controller
     public function update(CatalogRequest $request, Catalog $catalog): JsonResponse
     {
         if($request->validated())
-            return response()->json($this->catalogRepository->update($catalog, $request->getData()), 200);
+            return response()->json($this->catalogRepository->updateAndSync($catalog, $request->getData()), 200);
 
         return response()->json(["message" => "Validation error!"], 403);
     }

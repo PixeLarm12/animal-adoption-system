@@ -13,6 +13,8 @@
                         <textarea v-model="catalog.description" name="description" id="description" placeholder="Type catalog's description..." class="default-input-textarea" cols="30" rows="5" required></textarea>
                     </div>
 
+                    <animal-catalog-info :animals="catalog.animals" @update-animal="updateAnimal"></animal-catalog-info>
+
                     <div v-show="errors.length > 0" class="col-span-12 flex flex-col justify-start items-start text-left">
                         <span v-for="(error, index) in errors" :key="index" class="text-red-500 font-semibold">{{ error }}</span>
                     </div>
@@ -29,6 +31,7 @@
 <script>
 import axios from 'axios';
 import PageTemplate from "../../components/PageTemplate.vue"
+import AnimalCatalogInfo from '../../components/AnimalCatalogInfo.vue';
 
 export default {
     beforeMount() {
@@ -38,7 +41,8 @@ export default {
     },
 
     components: {
-        PageTemplate
+        PageTemplate,
+        AnimalCatalogInfo
     },
 
     computed: {
@@ -58,6 +62,7 @@ export default {
                 id: '',
                 title: '',
                 description: '',
+                animals: []
             },
         }
     },
@@ -69,15 +74,19 @@ export default {
                     this.catalog.id = response.data.id;
                     this.catalog.title = response.data.title;
                     this.catalog.description = response.data.description;
+                    this.catalog.animals = response.data.animals;
                 })
                 .catch(error => console.log(error));
         },
 
         async update() {
+            const animalsFormatted = this.catalog.animals.map(function(item) { return item.id; });
+
             await axios.put(`http://localhost/api/catalogs/${this.catalog.id}`, {
                     "id": this.catalog.id,
                     "title": this.catalog.title,
                     "description": this.catalog.description,
+                    "animals": animalsFormatted
                 }, { headers: this.headers })
                 .then(response => {
                     if(response) {
@@ -90,9 +99,12 @@ export default {
         },
 
         async save() {
+            const animalsFormatted = this.catalog.animals.map(function(item) { return item.id; });
+
             await axios.post("http://localhost/api/catalogs/", {
                 "title": this.catalog.title,
                 "description": this.catalog.description,
+                "animals": animalsFormatted,
             }, { headers: this.headers })
             .then(response => {
                 if(response) {
@@ -118,7 +130,16 @@ export default {
                 validator++;
             }
 
+            if(this.catalog.animals.length <= 0) {
+                this.errors.push("At least one valid ANIMAL are required.");
+                validator++;
+            }
+
             return validator == 0 ?? false;
+        },
+
+        updateAnimal(newAnimals) {
+            this.catalog.animals = newAnimals;
         },
 
         submit() {
