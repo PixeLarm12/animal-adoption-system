@@ -39,6 +39,52 @@
                         <textarea v-model="animal.description" name="description" id="description" placeholder="Type animal's description..." class="default-input resize-none" required></textarea>
                     </div>
 
+                    <!-- VACCINES -->
+                    <div class="col-span-12 w-11/12 flex justify-start items-center text-left flex-wrap">
+                        <label for="vaccines" class="text-default-gray font-bold text-lg">Vaccines</label>
+
+                        <div class="w-full grid grid-cols-12 place-content-center place-items-center gap-4 py-5">
+                            <div class="col-span-12 lg:col-span-6 w-full flex justify-start items-center text-left flex-wrap">
+                                <label for="vaccine-title" class="text-default-gray font-bold text-lg">Title <span class="text-xl text-red-600 font-bold">*</span></label>
+                                <input v-model="tempVaccine.title" type="vaccine-title" name="vaccine-title" id="vaccine-title" placeholder="Type vaccine's title..." class="default-input">
+                            </div>
+
+                            <div class="col-span-12 lg:col-span-3 w-full flex justify-start items-center text-left flex-wrap">
+                                <label for="vaccine-date" class="text-default-gray font-bold text-lg">First dose <span class="text-xl text-red-600 font-bold">*</span></label>
+                                <input v-model="tempVaccine.date" type="date" name="vaccine-date" id="vaccine-date" class="default-input">
+                            </div>
+
+                            <div class="col-span-12 lg:col-span-3 w-full flex justify-start items-center text-left flex-wrap">
+                                <label for="vaccine-next" class="text-default-gray font-bold text-lg">Second dose</label>
+                                <input v-model="tempVaccine.next" type="date" name="vaccine-next" id="vaccine-next" class="default-input">
+                            </div>
+
+                            <div class="col-span-12 w-full flex justify-start items-center text-left flex-wrap">
+                                <label for="vaccine-description" class="text-default-gray font-bold text-lg">Description</label>
+                                <textarea v-model="tempVaccine.description" name="vaccine-description" id="vaccine-description" placeholder="Type vaccine's description..." class="default-input resize-none"></textarea>
+                            </div>
+
+                            <div class="col-span-12 w-full flex flex-row justify-end items-end self-end text-left">
+                                <span @click="addVaccine" class="w-2/12 default-input-array-button">+ vaccine</span>
+                            </div>
+                        </div>
+
+                        <input-array-component-template :headers="vaccinesHeaders">
+                            <tr v-for="(vaccine, index) in animal.vaccines" :key="index" class="w-full border border-gray-400 divide-x-2 divide-gray-400">
+                                <td class="lg:pl-3 pl-1 h-5 w-4/12">
+                                    {{ (index+1) }}
+                                </td>
+                                <td class="lg:pl-3 pl-1 h-5 w-6/12">
+                                    {{ vaccine.title }}
+                                </td>
+                                <td class="lg:pl-3 pl-1 h-5 w-6/12">
+                                    {{ vaccine.date }}
+                                </td>
+                            </tr>  
+                        </input-array-component-template>
+                    </div>
+                    <!-- END VACCINES -->
+
                     <div v-show="errors.length > 0" class="col-span-12 flex flex-col justify-start items-start text-left">
                         <span v-for="(error, index) in errors" :key="index" class="text-red-500 font-semibold">{{ error }}</span>
                     </div>
@@ -55,6 +101,7 @@
 <script>
 import axios from 'axios';
 import PageTemplate from "../../components/PageTemplate.vue"
+import InputArrayComponentTemplate from '../../components/Utils/InputArrayComponentTemplate.vue';
 
 export default {
     beforeMount() {
@@ -66,7 +113,8 @@ export default {
     },
 
     components: {
-        PageTemplate
+        PageTemplate,
+        InputArrayComponentTemplate
     },
 
     computed: {
@@ -82,6 +130,17 @@ export default {
                 'Accept': "application/json;"
             },
             errors: [],
+            vaccinesHeaders: [
+                "Index",
+                "Title",
+                "Date"
+            ],
+            tempVaccine: {
+                title: '',
+                date: '',
+                next: '',
+                description: '',
+            },
             animal: {
                 id: '',
                 name: '',
@@ -196,6 +255,24 @@ export default {
             }
 
             return validator == 0 ?? false;
+        },
+
+        addVaccine() {
+            if(this.tempVaccine.title !== '', this.tempVaccine.date !== '') {
+                this.animal.vaccines.push({
+                    title: this.tempVaccine.title,
+                    date: this.tempVaccine.date,
+                    next: this.tempVaccine.next,
+                    description: this.tempVaccine.description,
+                });
+
+                this.tempVaccine = {
+                    title: '',
+                    date: '',
+                    next: '',
+                    description: '',
+                };
+            }
         },
 
         submit() {
