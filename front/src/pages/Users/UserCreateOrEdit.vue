@@ -33,6 +33,10 @@
                         <input v-model="user.password_confirmation" type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm your password..." class="default-input" required>
                     </div>
 
+                    <phone-info :phones="user.phones" @update-phone="updatePhone"></phone-info>
+
+                    <address-info :addresses="user.addresses" @update-address="updateAddress"></address-info>
+
                     <div v-show="errors.length > 0" class="col-span-12 flex flex-col justify-start items-start text-left">
                         <span v-for="(error, index) in errors" :key="index" class="text-red-500 font-semibold">{{ error }}</span>
                     </div>
@@ -49,10 +53,14 @@
 <script>
 import axios from 'axios';
 import PageTemplate from "../../components/PageTemplate.vue"
+import PhoneInfo from '../../components/PhoneInfo.vue';
+import AddressInfo from '../../components/AddressInfo.vue';
 
 export default {
     components: {
-        PageTemplate
+        PageTemplate,
+        PhoneInfo,
+        AddressInfo
     },
 
     data() {
@@ -69,21 +77,8 @@ export default {
                 password_confirmation: '',
                 cpf: '',
                 birth_date: '',
-                phones: [
-                    {
-                        area: '14',
-                        phone: '997929908',
-                    }
-                ],
-                addresses: [
-                    {
-                        street: 'Marcal de Arruda Campos',
-                        number: '795',
-                        zipcode: '17063060',
-                        neighborhood: 'Jd. Petropolis',
-                        complement: '',
-                    }
-                ],
+                phones: [],
+                addresses: [],
             },
         }
     },
@@ -156,6 +151,14 @@ export default {
             }
 
             return validator == 0 ?? false;
+        },
+
+        updatePhone(newPhones) {
+            this.user.phones = newPhones;
+        },
+
+        updateAddress(newAddresses) {
+            this.user.addresses = newAddresses;
         },
 
         submit() {

@@ -560,6 +560,14 @@ video {
   grid-column: span 12 / span 12;
 }
 
+.col-span-3{
+  grid-column: span 3 / span 3;
+}
+
+.col-span-9{
+  grid-column: span 9 / span 9;
+}
+
 .mb-5{
   margin-bottom: 1.25rem;
 }
@@ -1021,6 +1029,10 @@ video {
 
   .lg\:col-span-6{
     grid-column: span 6 / span 6;
+  }
+
+  .lg\:col-span-9{
+    grid-column: span 9 / span 9;
   }
 
   .lg\:gap-6{
