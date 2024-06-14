@@ -16,6 +16,10 @@
     @apply h-10 bg-orange-500 rounded-sm flex justify-center items-center text-white font-bold uppercase px-4 hover:bg-orange-600;
 }
 
+.default-input-array-button {
+    @apply h-8 bg-blue-600 rounded-md flex justify-center items-center text-sm text-white font-semibold uppercase px-2 hover:bg-blue-400 hover:cursor-pointer;
+}
+
 .bg-catalog-card {
     @apply bg-gray-50 border border-default-gray rounded-md h-80 w-56 hover:scale-105 hover:duration-200 hover:cursor-pointer flex flex-col justify-center items-center;
 }

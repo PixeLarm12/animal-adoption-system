@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Adoption extends Model
 {
@@ -23,13 +22,93 @@ class Adoption extends Model
         'observation',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'id', 'person_id');
+    protected $appends = [
+        'animal_name_append',
+        'person_name_append',
+        'status_formatted',
+    ];
+
+    public function getAnimalNameAppendAttribute() {
+        $animal = $this->animal;
+
+        return $animal->name;
     }
 
-    public function animal(): HasOne
+    public function getPersonNameAppendAttribute() {
+        $user = $this->user;
+
+        return $user->name;
+    }
+
+    public function getStatusFormattedAttribute() {
+        $status = self::getStatusByKey($this->attributes['status']);
+
+        return $status ? $status['label'] : "";
+    }
+
+    public static function boot()
     {
-        return $this->hasOne(Animal::class);
+        parent::boot();
+
+        self::created(function ($model) {
+            $model->animal->update([
+                'adoption_status' => $model->status,
+            ]);
+        });
+
+        self::updated(function ($model) {
+            $model->animal->update([
+                'adoption_status' => $model->status,
+            ]);
+        });
+
+        self::deleted(function ($model) {
+            $model->animal->update([
+                'adoption_status' => self::ADOPTION_STATUS_NOT_STARTED,
+            ]);
+        });
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'person_id', 'id');
+    }
+
+    public function animal(): BelongsTo
+    {
+        return $this->belongsTo(Animal::class, 'animal_id', 'id');
+    }
+
+    public static function getStatusByKey($key)
+    {
+        $status = self::getAdoptionStatus();
+
+        foreach($status as $el) {
+            if($el['key'] == $key) {
+                return $el;
+            }
+        }
+    }
+
+    public static function getAdoptionStatus()
+    {
+        return [
+            [
+                "key" => self::ADOPTION_STATUS_NOT_STARTED,
+                "label" => "Not started",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_PROCESSING,
+                "label" => "Processing",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_ACCEPTED,
+                "label" => "Accepted",
+            ],
+            [
+                "key" => self::ADOPTION_STATUS_NOT_ACCEPTED,
+                "label" => "Not accepted",
+            ],
+        ];
     }
 }

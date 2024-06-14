@@ -23,6 +23,6 @@ class UserRepository extends BaseRepository
             $user->addresses()->createMany($data['addresses']);
         }
 
-        return $user->with(["phones", "addresses"]);
+        return $user;
     }
 }

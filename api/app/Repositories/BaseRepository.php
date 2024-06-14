@@ -28,9 +28,13 @@ class BaseRepository implements BaseRepositoryInterface
         return $model ? $model->update($data) : false;
     }
 
-    public function find(int $id): ?Model
+    public function find(int $id, $relations = []): ?Model
     {
-        return $this->model->find($id);
+        if($relations) {
+            return $this->model->where('id',$id)->with($relations)->firstOrFail();
+        }
+
+        return $this->model->where('id',$id)->firstOrFail();
     }
 
     public function delete(Model $model): bool

@@ -21,6 +21,11 @@ class CatalogController extends Controller
         return response()->json($this->catalogRepository->all(), 200);
     }
 
+    public function show($id): JsonResponse
+    {
+        return response()->json($this->catalogRepository->find($id, ['animals']), 200);
+    }
+
     public function store(CatalogRequest $request): JsonResponse
     {
         if($request->validated())
@@ -32,7 +37,7 @@ class CatalogController extends Controller
     public function update(CatalogRequest $request, Catalog $catalog): JsonResponse
     {
         if($request->validated())
-            return response()->json($this->catalogRepository->update($catalog, $request->getData()), 200);
+            return response()->json($this->catalogRepository->updateAndSync($catalog, $request->getData()), 200);
 
         return response()->json(["message" => "Validation error!"], 403);
     }

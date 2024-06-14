@@ -17,7 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('/users',  UserController::class)->names('users');
-Route::apiResource('/adoptions',  AdoptionController::class)->names('adoptions');
-Route::apiResource('/animals',  AnimalController::class)->names('animals');
 Route::apiResource('/catalogs',  CatalogController::class)->names('catalogs');
+Route::apiResource('/users',  UserController::class)->only(['index', 'store', 'destroy'])->names('users');
+
+Route::prefix('animals')->name('animals.')->group(function () {
+    Route::get('/get-form-select-options', [AnimalController::class, 'getFormSelectOptions'])->name('getFormSelectOptions');
+    Route::get('/', [AnimalController::class, 'index'])->name('index');
+    Route::get('/{animal}', [AnimalController::class, 'show'])->name('show');
+    Route::put('/{animal}', [AnimalController::class, 'update'])->name('update');
+    Route::delete('/{animal}', [AnimalController::class, 'destroy'])->name('destroy');
+    Route::post('/', [AnimalController::class, 'store'])->name('store');
+});
+
+Route::prefix('adoptions')->name('adoptions.')->group(function () {
+    Route::get('/get-form-select-options/{animalId}', [AdoptionController::class, 'getFormSelectOptions'])->name('getFormSelectOptions');
+    Route::get('/', [AdoptionController::class, 'index'])->name('index');
+    Route::get('/{adoption}', [AdoptionController::class, 'show'])->name('show');
+    Route::put('/{adoption}', [AdoptionController::class, 'update'])->name('update');
+    Route::delete('/{adoption}', [AdoptionController::class, 'destroy'])->name('destroy');
+    Route::post('/', [AdoptionController::class, 'store'])->name('store');
+});

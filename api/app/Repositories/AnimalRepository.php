@@ -2,12 +2,28 @@
 
 namespace App\Repositories;
 
+use App\Models\Adoption;
 use App\Models\Animal;
+use Illuminate\Database\Eloquent\Collection;
 
 class AnimalRepository extends BaseRepository
 {
     public function __construct(Animal $model) {
         parent::__construct($model);
+    }
+
+    public function getAnimalsAbleToAdopt($animalId = -1): Collection
+    {
+        $animalsToAdopt = Animal::ableToAdopt()->get();
+
+        if($animalId != -1) {
+            $actualAnimal = $this->find($animalId);
+
+            if($actualAnimal)
+                $animalsToAdopt->push($actualAnimal);
+        }
+
+        return $animalsToAdopt;
     }
 
     public function save(array $data): Animal
@@ -22,6 +38,18 @@ class AnimalRepository extends BaseRepository
             $animal->medicalInformations()->createMany($data['medical_informations']);
         }
 
-        return $animal->with(["vaccines", "medicalInformations"]);
+        return $animal;
+    }
+
+    public function getFormSelectOptions(): array
+    {
+        return [
+            "speciesOptions" => $this->getSpecies(),
+        ];
+    }
+
+    public function getSpecies(): array
+    {
+        return Animal::getSpecies();
     }
 }

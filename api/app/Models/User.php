@@ -33,7 +33,7 @@ class User extends Authenticatable
         return $this->hasMany(Phone::class, 'person_id', 'id');
     }
 
-    public function address(): HasMany
+    public function addresses(): HasMany
     {
         return $this->hasMany(Address::class, 'person_id', 'id');
     }
